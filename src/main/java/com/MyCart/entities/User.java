@@ -10,37 +10,47 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
-@Table(name="user")
+@Table(name = "user")
 public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(length = 10,name = "user_id")
+	@Column(length = 10, name = "user_id")
 	private Integer userId;
-	@Column(length = 100,name="user_name")
+	@Column(length = 100, name = "user_name")
 	private String userName;
-	@Column(length = 100,name="user_email")
+	@Column(length = 100, name = "user_email")
 	private String userEmail;
-	@Column(length = 100,name="user_psw")
+	@Column(length = 100, name = "user_psw")
 	private String userPassword;
-	@Column(length = 10,name="user_phone")
+	@Column(length = 10, name = "user_phone")
 	private String userPhone;
-	@Column(length = 1500,name="user_pic")
+	@Column(length = 1500, name = "user_pic")
 	private String userPic;
 
-	@Column(length = 1500,name="user_addr")
+	@Column(length = 1500, name = "user_addr")
 	private String userAddress;
-	@Column(length = 20,name="user_type")
+	@Column(length = 20, name = "user_type")
 	private String userType;
-	
+
 	@CreationTimestamp
-	
+	@Column(name = "created_date", updatable = false)
 	private Timestamp createdDate;
 
-	public User(int userId, String userName, String userEmail, String userPassword, String userPhone, String userPic,
-			String userAddress) {
+	@UpdateTimestamp
+	@Column(name = "updated_date", insertable = false)
+	private Timestamp updatedDate;
+
+	public User() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public User(Integer userId, String userName, String userEmail, String userPassword, String userPhone,
+			String userPic, String userAddress, String userType, Timestamp createdDate, Timestamp updatedDate) {
 		super();
 		this.userId = userId;
 		this.userName = userName;
@@ -49,6 +59,9 @@ public class User {
 		this.userPhone = userPhone;
 		this.userPic = userPic;
 		this.userAddress = userAddress;
+		this.userType = userType;
+		this.createdDate = createdDate;
+		this.updatedDate = updatedDate;
 	}
 
 	public User(String userName, String userEmail, String userPassword, String userPhone, String userPic,
@@ -63,15 +76,11 @@ public class User {
 		this.userType = userType;
 	}
 
-	public User() {
-		super();
-	}
-
-	public int getUserId() {
+	public Integer getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
 
@@ -131,11 +140,27 @@ public class User {
 		this.userType = userType;
 	}
 
+	public Timestamp getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(Timestamp createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	public Timestamp getUpdatedDate() {
+		return updatedDate;
+	}
+
+	public void setUpdatedDate(Timestamp updatedDate) {
+		this.updatedDate = updatedDate;
+	}
+
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", userName=" + userName + ", userEmail=" + userEmail + ", userPassword="
 				+ userPassword + ", userPhone=" + userPhone + ", userPic=" + userPic + ", userAddress=" + userAddress
-				+ ", userType=" + userType + "]";
+				+ ", userType=" + userType + ", createdDate=" + createdDate + ", updatedDate=" + updatedDate + "]";
 	}
 
 }

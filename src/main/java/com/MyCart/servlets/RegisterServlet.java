@@ -1,7 +1,6 @@
 package com.MyCart.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -46,8 +45,6 @@ public class RegisterServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-
-
 		try {
 			String name = request.getParameter("name");
 			String email = request.getParameter("email");
@@ -56,7 +53,7 @@ public class RegisterServlet extends HttpServlet {
 			String profile = request.getParameter("profile");
 			String address = request.getParameter("address");
 
-			User user = new User(name, email, password, contact, profile, address,"normal");
+			User user = new User(name, email, password, contact, profile, address, "normal");
 
 			Session s = FactoryProvider.getFactory().openSession();
 			Transaction tr = s.beginTransaction();
@@ -66,19 +63,17 @@ public class RegisterServlet extends HttpServlet {
 			tr.commit();
 			s.close();
 
-			
-			
-			HttpSession session=request.getSession();
+			HttpSession session = request.getSession();
 			session.setAttribute("message", "Registration Successful");
 			response.sendRedirect("register.jsp");
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			
-			HttpSession session=request.getSession();
+
+			HttpSession session = request.getSession();
 			session.setAttribute("errormsg", "something went wrong!!! Please try again...");
 			response.sendRedirect("register.jsp");
-			
+
 		}
 
 	}
