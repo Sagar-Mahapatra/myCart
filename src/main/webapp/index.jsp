@@ -24,7 +24,7 @@
 
 	<%@ include file="components/NavBar.jsp"%>
 
-
+	<h1><%=FactoryProvider.getFactory()%></h1>
 	<main>
 		<div class="container">
 			<div class="slider">

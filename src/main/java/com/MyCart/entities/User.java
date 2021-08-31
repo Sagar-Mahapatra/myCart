@@ -1,33 +1,43 @@
 package com.MyCart.entities;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
+@Table(name="user")
 public class User {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(length = 10)
-	private int userId;
-	@Column(length = 100)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(length = 10,name = "user_id")
+	private Integer userId;
+	@Column(length = 100,name="user_name")
 	private String userName;
-	@Column(length = 100)
+	@Column(length = 100,name="user_email")
 	private String userEmail;
-	@Column(length = 100)
+	@Column(length = 100,name="user_psw")
 	private String userPassword;
-	@Column(length = 10)
+	@Column(length = 10,name="user_phone")
 	private String userPhone;
-	@Column(length = 1500)
+	@Column(length = 1500,name="user_pic")
 	private String userPic;
 
-	@Column(length = 1500)
+	@Column(length = 1500,name="user_addr")
 	private String userAddress;
-	@Column(length = 20)
+	@Column(length = 20,name="user_type")
 	private String userType;
+	
+	@CreationTimestamp
+	
+	private Timestamp createdDate;
 
 	public User(int userId, String userName, String userEmail, String userPassword, String userPhone, String userPic,
 			String userAddress) {
